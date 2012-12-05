@@ -108,18 +108,46 @@ function init() {
 			var f = new Food();
 	
 	
-	var Bonus = function(){
-		this.x1 = Math.round(Math.random() * (w - size) / size);
-		this.y1 = Math.round(Math.random() * (h - size) / size);
+	var maxSpeed = function(){
+		this.x = Math.round(Math.random() * (w - size) / size);
+		this.y = Math.round(Math.random() * (h - size) / size);
 		
 		this.draw = function() {
-			ctx.fillStyle = "black";
 			
-			ctx.fillRect(this.x1*size, this.y1*size, size, size);
+			ctx.fillStyle = "orange";
+			
+			ctx.fillRect(this.x*size, this.y*size, size, size);
+		}
+	}
+	
+			
+			var b = new maxSpeed();
+			
+			
+	var minSpeed = function(){
+		this.x = Math.round(Math.random() * (w - size) / size);
+		this.y = Math.round(Math.random() * (h - size) / size);
+		
+		this.draw = function() {
+			ctx.fillStyle = "blue";
+			
+			ctx.fillRect(this.x*size, this.y*size, size, size);
 		}
 	}
 			
-			var b = new Bonus();
+			var k = new minSpeed();
+			
+	var BonusColor = function(){
+		this.x = Math.round(Math.random() * (w - size) / size);
+		this.y = Math.round(Math.random() * (h - size) / size);
+		
+		this.draw = function() {
+			ctx.fillStyle = "violet";
+			
+			ctx.fillRect(this.x*size, this.y*size, size, size);
+		}
+	}
+			var t = new BonusColor();
 			
 	//Initialize the snake
 	function initSnake() {
@@ -181,8 +209,62 @@ function init() {
 			}
 			over++
 		}
+				
+		//Bonus collision maxSpeed
+		if(head_x == b.x && head_y == b.y) {
+			coll = 1;
+			b = new maxSpeed();	
+			speed += 5;
+			scoreText.innerHTML = "Score: "+score;
+			foodMusic.pause();
+			foodMusic.currentTime = 0;
+			foodMusic.play();
+			
+			//Increase speed
+			if(speed <= 45) speed ++;
+			clearInterval(game_loop);
+			game_loop = setInterval(draw, 1000/speed);
+		}
 		
-	
+		
+		//Bonus collision minSpeed
+		if(head_x == k.x && head_y == k.y) {
+			coll = 1;
+			k = new minSpeed();
+			speed -= 5;
+			scoreText.innerHTML = "Score: "+score;
+			foodMusic.pause();
+			foodMusic.currentTime = 0;
+			foodMusic.play();
+			
+			//Increase speed
+			if(speed <= 45) speed ++;
+			clearInterval(game_loop);
+			game_loop = setInterval(draw, 1000/speed);
+		}
+		
+		//Bonus collision ColorBonus
+		if(head_x == t.x && head_y == t.y) {
+			coll = 1;
+			t = new BonusColor();{
+			for(var i = 0; i < snake.length; i++) {
+				var s = snake[i];
+			
+				ctx.fillStyle = "blake";
+				ctx.fillRect(s.x*size, s.y*size, size, size);
+			
+			}
+	}
+			scoreText.innerHTML = "Score: "+score;
+			foodMusic.pause();
+			foodMusic.currentTime = 0;
+			foodMusic.play();
+			setTimeout(func, 5000);
+			//Increase speed
+			if(speed <= 45) speed ++;
+			clearInterval(game_loop);
+			game_loop = setInterval(draw, 1000/speed);
+		}
 		
 		//Food collision
 		if(head_x == f.x && head_y == f.y) {
@@ -225,11 +307,16 @@ function init() {
 		//Draw food
 		f.draw();
 		b.draw();
+		k.draw();
+		t.draw();setTimeout(t.draw, 10000);
 	}
 	
 	reset = function() {
 		initSnake();
 		f = new Food();
+		b = new maxSpeed();
+		k = new minSpeed();
+		t = new BonusColor();
 		reMenu.style.zIndex = "-1"
 		dir = "right";
 		over = 0;
