@@ -243,6 +243,7 @@ function init() {
 			game_loop = setInterval(draw, 1000/speed);
 		}
 		
+		
 		//Bonus collision ColorBonus
 		if(head_x == t.x && head_y == t.y) {
 			coll = 1;
