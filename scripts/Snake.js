@@ -94,6 +94,63 @@ function Snake(context) {
         }
 		
 		
+		//Bonus collision
+        if(head_x == f1.x && head_y == f1.y) {
+            coll = 1;
+            f1 = new Bonus(this.size);
+            var tail = {x: head_x, y:head_y};
+            //this.pieces.unshift(tail);
+            //score += 10;
+			speed += 5;
+            scoreText.innerHTML = "Score: "+score;
+            foodMusic.pause();
+            foodMusic.currentTime = 0;head_x
+            foodMusic.play();
+
+            //Increase speed
+            if(this.speed <= 45) this.speed ++;
+            clearInterval(this.game_loop);
+            this.game_loop = setInterval(draw, 1000/this.speed);
+        }
+
+		
+		//Bonus1 collision
+        if(head_x == f2.x && head_y == f2.y) {
+            coll = 1;
+            f2 = new Bonus1(this.size);
+            var tail = {x: head_x, y:head_y};
+            //this.pieces.unshift(tail);
+            //score += 10;
+			speed -= 5;
+            scoreText.innerHTML = "Score: "+score;
+            foodMusic.pause();
+            foodMusic.currentTime = 0;head_x
+            foodMusic.play();
+
+            //Increase speed
+            if(this.speed <= 45) this.speed ++;
+            clearInterval(this.game_loop);
+            this.game_loop = setInterval(draw, 1000/this.speed);
+        }
+		
+		//Bonus2 collision
+        if(head_x == f3.x && head_y == f3.y) {
+            coll = 1;
+            f3 = new Bonus2(this.size);
+            var tail = {x: head_x, y:head_y};
+            //this.pieces.unshift(tail);	
+            score += 50;
+            scoreText.innerHTML = "Score: "+score;
+            foodMusic.pause();
+            foodMusic.currentTime = 0;head_x
+            foodMusic.play();
+
+            //Increase speed
+            if(this.speed <= 45) this.speed ++;
+            clearInterval(this.game_loop);
+            this.game_loop = setInterval(draw, 1000/this.speed);
+        }
+		
 		
         else {
             //Check collision between snake parts
@@ -120,6 +177,31 @@ function Snake(context) {
         clearInterval(snake.game_loop);
        
 
-        
+        //Get the gameover text
+        var goText = document.getElementById("info2");
+
+        //Custom funny gameover messages
+        var msgsSelf = [];
+        msgsSelf[0] = "Там есть много еды.Не ешь сам себя!";
+        msgsSelf[1] = "Твое тело что, вкуснее еды?";
+        msgsSelf[2] = "В рот тебе хвост!!!";
+        msgsSelf[3] = "У тебя что, болезнь самопоедания?";
+
+        var msgsWall = [];
+        msgsWall[0] = "Ты считаешь что твоя голова крепче стены?";
+        msgsWall[1] = "СМОТРИТЕ ВСЕ!!!НЕТ ГОЛОВЫ!!!";
+        msgsWall[2] = "Ну сколько можно таранить стены?!";
+        msgsWall[3] = "Голова в дребезги!";
+        msgsWall[4] = "Не видишь стену?БАХ!";
+
+        //Show the messages
+        if(this.hitType == "wall") {
+            goText.innerHTML = msgsWall[Math.floor(Math.random() * msgsWall.length)];
+        }
+        else if(this.hitType == "self") {
+            goText.innerHTML = msgsSelf[Math.floor(Math.random() * msgsSelf.length)];
+        }
+
+        reMenu.style.zIndex = "1";   
     }
 }

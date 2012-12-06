@@ -37,6 +37,9 @@ var score = 0;
 var reset;
 
 var f = new Food(snake.size);
+var f1 = new Bonus(snake.size);
+var f2 = new Bonus1(snake.size);
+var f3 = new Bonus2(snake.size);
 
 function init() {
     mainMusic.play();
@@ -69,6 +72,9 @@ function reset() {
 	snake = new Snake(ctx);
 	snake.initSnake();
     var f = new Food();
+	var f1 = new Bonus();
+	var f2 = new Bonus1();
+	var f3 = new Bonus2();
 	
 	this.reMenu.style.zIndex = "-1";
     snake.dir = "right";
@@ -92,7 +98,9 @@ function draw() {
 
     //Draw food
     f.draw();
-    
+    f1.draw();
+	f2.draw();
+	f3.draw()
 }
 
 startMenu();
