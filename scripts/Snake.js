@@ -25,7 +25,7 @@ function Snake(context) {
         }
     }
 	
-         this.updateSnake = function() {
+    this.updateSnake = function() {
         //Get the directions
         document.onkeydown = function (e) {
             var key = e.keyCode;
@@ -52,10 +52,10 @@ function Snake(context) {
         var head_y = this.pieces[0].y;
 
         //Directions
-        if(dir == "right") head_x++;
-        else if(dir == "left") head_x--;
-        else if(dir == "up") head_y--;
-        else if(dir == "down") head_y++;
+        if(this.dir == "right") head_x++;
+        else if(this.dir == "left") head_x--;
+        else if(this.dir == "up") head_y--;
+        else if(this.dir == "down") head_y++;
 
         //Move snake
         var tail = this.pieces.pop();
@@ -79,8 +79,8 @@ function Snake(context) {
             coll = 1;
             f = new Food(this.size);
             var tail = {x: head_x, y:head_y};
-           this.pieces.unshift(tail);
-			snake.unshift(tail);
+			this.pieces.unshift(tail);
+			//snake.unshift(tail);
             score += 10;
             scoreText.innerHTML = "Score: "+score;
             foodMusic.pause();
@@ -170,12 +170,13 @@ function Snake(context) {
    	
         
     this.gameover = function() {
-		ctx.fillStyle = 'black' ;
+		//ctx.fillStyle = 'black' ;
 		//ctx.fillStyle = url('../images/111.png') ;
-		ctx.fillRect(0, 0, w, h);
-        //ctx.clearRect(0, 0, w, h);
+		//ctx.fillRect(0, 0, w, h);
+        ctx.clearRect(0, 0, w, h);
         clearInterval(snake.game_loop);
-       
+		mainMusic.pause();
+        goMusic.play();
 
         //Get the gameover text
         var goText = document.getElementById("info2");

@@ -25,16 +25,16 @@ var ctx = canvas.getContext("2d");
 var w =800;
 var h =600;
 
-canvas.height = h;
-canvas.width = w;
+canvas.height = 600;
+canvas.width = 800;
 
 var snake = new Snake(ctx);
 var bot = new Bot();
 
-
+var menu = document.getElementById("menu");
+var reMenu = document.getElementById("reMenu");
 var scoreText;
 var score = 0;
-var reset;
 
 var f = new Food(snake.size);
 var f1 = new Bonus(snake.size);
@@ -61,9 +61,6 @@ function showButton() {
 
 //Menus
 function startMenu() {
-	 var menu = document.getElementById("menu");
-	 var reMenu = document.getElementById("reMenu");
-
     this.scoreText = document.getElementById("score");
     this.reMenu.style.zIndex = "-1";
 }
@@ -87,8 +84,6 @@ function reset() {
     scoreText.innerHTML = "Score: "+score;
     mainMusic.currentTime = 0;
     mainMusic.play();
-	
-	return;
 }
 
 function draw() {
