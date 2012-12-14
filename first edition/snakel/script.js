@@ -184,7 +184,7 @@ function init() {
 			else if(key == 38 && dir != "down") setTimeout(function() {dir = "up"; }, 30);
 			else if(key == 39 && dir != "left") setTimeout(function() {dir = "right"; }, 30);
 			else if(key == 40 && dir != "up") setTimeout(function() {dir = "down"; }, 30);
-
+			else if(key == 80 && dir != "pause") setTimeout(function() {dir = "pause"; }, 30);
 			if(key) e.preventDefault();
 
 		}
@@ -194,7 +194,7 @@ function init() {
 		else if(dir == "left") head_x--;
 		else if(dir == "up") head_y--;
 		else if(dir == "down") head_y++;
-		
+		else if(dir == "pause") return;
 		//Move snake
 		var tail = snake.pop();
 		tail.x = head_x;
