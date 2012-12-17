@@ -359,30 +359,30 @@ function init() {
 	
 	function getWinSize() {
     var sizes = {
-        'myWidth':'0',
-        'myHeight':'0'
+        'canvas.width':'0',
+        'canvas.height':'0'
     };
     if (typeof( window.innerWidth ) == 'number') {
 
         // not IE
-        sizes.myWidth = window.innerWidth;
-        sizes.myHeight = window.innerHeight;
+        sizes.canvas.width = window.innerWidth;
+        sizes.canvas.height = window.innerHeight;
     } else if (document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight )) {
 
         // IE 6+
-        sizes.myWidth = document.documentElement.clientWidth;
-        sizes.myHeight = document.documentElement.clientHeight;
+        sizes.canvas.width = document.documentElement.clientWidth;
+        sizes.canvas.height = document.documentElement.clientHeight;
     } else if (document.body && ( document.body.clientWidth || document.body.clientHeight )) {
 
         // IE 4
-        sizes.myWidth = document.body.clientWidth;
-        sizes.myHeight = document.body.clientHeight;
+        sizes.canvas.width = document.body.clientWidth;
+        sizes.canvas.height = document.body.clientHeight;
     } else if (0 != arguments.length) {
 		var o_canvasID = arguments[0];
 		var o_canvas = document.getElementById(o_canvasID);
 		window.console.log(o_canvas);
-		sizes.myWidth = o_canvas.getAttribute('width');
-        sizes.myHeight = o_canvas.getAttribute('height');
+		sizes.canvas.width = o_canvas.getAttribute('width');
+        sizes.canvas.height = o_canvas.getAttribute('height');
 	}
     return sizes;
 }
