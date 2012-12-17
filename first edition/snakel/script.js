@@ -1,10 +1,14 @@
 		
-var mainMusic = document.getElementById("main_music"),
+		var i_screenHeight = getWinSize().h;
+		var i_screenWidth = getWinSize().w;
+		
+		var mainMusic = document.getElementById("main_music"),
 		foodMusic = document.getElementById("food"), 
 		goMusic = document.getElementById("gameOver");
 
 var files = [mainMusic, foodMusic, goMusic];
 var counter = 0;
+
 
 		
 var start = document.getElementById("start");
@@ -40,44 +44,44 @@ canvas.width = w;
 
 function getWinSize() {
     var sizes = {
-        'myWidth':'0',
-        'myHeight':'0'
+        'w':'0',
+        'h':'0'
     };
     if (typeof( window.innerWidth ) == 'number') {
 
         // not IE
-        sizes.myWidth = window.innerWidth;
-        sizes.myHeight = window.innerHeight;
+        sizes.w = window.innerWidth;
+        sizes.h = window.innerHeight;
     } else if (document.documentElement && ( document.documentElement.clientWidth || document.documentElement.clientHeight )) {
 
         // IE 6+
-        sizes.myWidth = document.documentElement.clientWidth;
-        sizes.myHeight = document.documentElement.clientHeight;
+        sizes.w = document.documentElement.clientWidth;
+        sizes.h = document.documentElement.clientHeight;
     } else if (document.body && ( document.body.clientWidth || document.body.clientHeight )) {
 
         // IE 4
-        sizes.myWidth = document.body.clientWidth;
-        sizes.myHeight = document.body.clientHeight;
+        sizes.w = document.body.clientWidth;
+        sizes.h = document.body.clientHeight;
     } else if (0 != arguments.length) {
 		var o_canvasID = arguments[0];
 		var o_canvas = document.getElementById(o_canvasID);
 		window.console.log(o_canvas);
-		sizes.myWidth = o_canvas.getAttribute('width');
-        sizes.myHeight = o_canvas.getAttribute('height');
+		sizes.w = o_canvas.getAttribute('width');
+        sizes.h = o_canvas.getAttribute('height');
 	}
     return sizes;
 }
 
 function getCanvasSize(o_canvasID) {
     var sizes = {
-        'myWidth':'0',
-        'myHeight':'0'
+        'w':'0',
+        'h':'0'
     };
     
     if (typeof(o_canvasID) != "undefined") {
 		var o_canvas = document.getElementById(o_canvasID);
-		sizes.myWidth = o_canvas.getAttribute('width') || o_canvas.style.width || o_canvas.currentStyle[width] || document.defaultView.getComputedStyle(o_canvas, "").getPropertyValue(width);
-        sizes.myHeight = o_canvas.getAttribute('height') || o_canvas.style.height || o_canvas.currentStyle[height] || document.defaultView.getComputedStyle(o_canvas, "").getPropertyValue(height);
+		sizes.w = o_canvas.getAttribute('width') || o_canvas.style.width || o_canvas.currentStyle[width] || document.defaultView.getComputedStyle(o_canvas, "").getPropertyValue(width);
+        sizes.h = o_canvas.getAttribute('height') || o_canvas.style.height || o_canvas.currentStyle[height] || document.defaultView.getComputedStyle(o_canvas, "").getPropertyValue(height);
 	}
     return sizes;
 }
