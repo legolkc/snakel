@@ -98,6 +98,7 @@ function init() {
 	
 	var snake,
 			size = 10,
+			size_food = 10,
 			speed = 5,
 			dir,
 			game_loop,
@@ -151,8 +152,17 @@ function init() {
 		this.draw = function() {
 			ctx.fillStyle = "red";
 			
-			ctx.fillRect(this.x*size, this.y*size, size, size);
-			ctx.drawImage(food.image, this.x*size-5, this.y*size-5, size*2, size*2);
+			ctx.fillRect(this.x*size, this.y*size, size_food , size_food );
+			ctx.drawImage(food.image, this.x*size -5, this.y*size -5, size_food *2, size_food*2);
+			if (size_food > 1){
+					size_food -= 0.05;
+			}
+			else {
+			size_food = 10;
+			this.x = Math.round(Math.random() * (w - size) / size);
+			this.y = Math.round(Math.random() * (h - size) / size);
+			Food();
+			}
 		}
 	}
 			
@@ -465,6 +475,7 @@ function mouseControl(event)
 		//Food collision
 		if(head_x == f.x && head_y == f.y) {
 			coll = 1;
+			size_food = 10;
 			f = new Food();
 			var tail = {x: head_x, y:head_y};
 			snake.unshift(tail);	
@@ -505,6 +516,7 @@ function mouseControl(event)
 		b.draw();
 		k.draw();
 		t.draw();setTimeout(t.draw, 10000);
+		
 	}
 	
 	function drawSnake() {
