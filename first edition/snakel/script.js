@@ -201,11 +201,14 @@ function init() {
 	var minSpeed = function(){
 		this.x = Math.round(Math.random() * (w - size) / size);
 		this.y = Math.round(Math.random() * (h - size) / size);
+		minSpeed.image = new Image();
+		minSpeed.image.src = 'images/minSpeed.png';
 		
 		this.draw = function() {
-			ctx.fillStyle = "blue";
+			//ctx.fillStyle = "blue";
 			
-			ctx.fillRect(this.x*size, this.y*size, size_minSpeed, size_minSpeed);
+			//ctx.fillRect(this.x*size, this.y*size, size_minSpeed, size_minSpeed);
+			ctx.drawImage(minSpeed.image, this.x*size-5, this.y*size-5, size*2, size*2);
 			
 			if (size_minSpeed > 1){
 					size_minSpeed -= 0.02;
@@ -255,9 +258,12 @@ function init() {
 	function paintSnake() {
 		for(var i = 0; i < snake.length; i++) {
 			var s = snake[i];
+			s.image = new Image();
+		    s.image.src = 'images/snake.png';
 			
 			ctx.fillStyle = "white";
 			ctx.fillRect(s.x*size, s.y*size, size, size);
+			ctx.drawImage(s.image, s.x*size-5, s.y*size-5, size*2, size*2);
 			
 		}
 	}
