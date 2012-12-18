@@ -146,11 +146,13 @@ function init() {
 	var Food = function(){
 		this.x = Math.round(Math.random() * (w - size) / size);
 		this.y = Math.round(Math.random() * (h - size) / size);
-		
+		food.image = new Image();
+		food.image.src = 'images/food.png';
 		this.draw = function() {
 			ctx.fillStyle = "red";
 			
 			ctx.fillRect(this.x*size, this.y*size, size, size);
+			ctx.drawImage(food.image, this.x*size-5, this.y*size-5, size*2, size*2);
 		}
 	}
 			
