@@ -1,4 +1,7 @@
-		
+document.ontouchstart = function(event) 
+{ 
+	event.preventDefault();
+};		
 		var i_screenHeight = getWinSize().h;
 		var i_screenWidth = getWinSize().w;
 		
@@ -9,7 +12,7 @@
 var files = [mainMusic, foodMusic, goMusic];
 var counter = 0;
 
-
+window.captureEvents(Event.CLICK);
 		
 var start = document.getElementById("start");
 	loading = document.getElementById("loading");
@@ -214,15 +217,8 @@ function init() {
 		}
 	}
 	
-
-	
-	function updateSnake() {
-		//Update the position of the snake
-		var head_x = snake[0].x;
-		var head_y = snake[0].y;
-		
-		//Get the directions
-		document.onkeydown = function(e) {
+$('#canvas').mousedown(function(e) {
+		/*
 			var key = e.keyCode;
 			//console.log(key);
 			
@@ -232,9 +228,160 @@ function init() {
 			else if(key == 40 && dir != "up") setTimeout(function() {dir = "down"; }, 30);
 			else if(key == 80 && dir != "pause") setTimeout(function() {dir = "pause"; }, 30);
 			if(key) e.preventDefault();
-
+		*/
+		
+		if( e.pageX < (ctx.canvas.width + 500)/2 )
+		{
+			if( dir == "down" ) dir = "right";
+			else if( dir == "right" ) dir = "up";
+			else if( dir == "up" ) dir = "left";
+			else if( dir == "left" ) dir = "down";
 		}
-			
+		else
+		{
+			if( dir == "down" ) dir = "left";
+			else if( dir == "right" ) dir = "down";
+			else if( dir == "up" ) dir = "right";
+			else if( dir == "left" ) dir = "up";
+		}
+    });
+	
+	function updateSnake() {
+		//Update the position of the snake
+		var head_x = snake[0].x;
+		var head_y = snake[0].y;
+///////////////////////////////////////////////////////////////управление мышкой		
+function Move()
+{
+	//this.speed = 120;
+	
+	this.left = function()
+	{
+		if(direction != 2)
+		{
+			direction = 4;
+			head_x = head_x - size;
+			if(head_x < 0)
+			 {
+				hitType = "self";
+				gameover();
+			 }
+			drawSnake();
+		}
+	};
+
+	this.right = function()
+	{
+		if(direction !=4 )
+		{
+			direction = 2;
+			head_x = head_x + size;
+			if(head_x  >= w)
+			 {
+				hitType = "self";
+				gameover();
+			 }
+			drawSnake();
+		}
+	};
+
+	this.up = function()
+	{
+		if(direction != 3)
+		{
+			direction = 1;
+			head_y = head_y - size;
+			if(head_y < 0)
+			 {
+				hitType = "self";
+				gameover();
+			 }
+
+			drawSnake();
+		}
+	};
+	
+	this.down = function()
+	{
+		if(direction != 1)
+		{
+			direction = 3;
+			head_y = head_y + size;
+			if(head_y >=  h)
+			 {
+				hitType = "self";
+				gameover();
+			 }
+			drawSnake();
+		}
+	};
+	
+	//keep moving
+	this.slither = function()
+	{
+		switch(direction)
+		{
+			case 1: snake.up(); break;
+			case 2: snake.right(); break;
+			case 3: snake.down(); break;
+			case 4: snake.left(); break;
+			default: break;
+		}
+	};
+	
+	this.trip = function(body)
+	{
+		return (body[0] == head_x && body[1] == head_y);  
+	};
+}
+	//keyboard controls
+function keyBoardControl(event)
+{
+	var keyCode;
+	if(event == null)
+	{
+		keyCode = window.event.keyCode;
+	}
+	else
+	{
+		keyCode = event.keyCode;
+	}
+	switch(keyCode)
+	{
+		case 37: snake.left(); break; 
+		case 38: snake.up(); break;
+		case 39: snake.right(); break;
+		case 40: snake.down(); break; 
+		default: break;
+	}
+}
+
+//keyboard controls
+function mouseControl(event)
+{
+
+		moveX = event.layerX;
+		moveY = event.layerY;
+	
+	if (direction == 1 || direction == 3)
+	{
+		if(moveX > head_x) 
+			snake.right(); 
+		else
+			snake.left();
+	}
+	// else direction is left or right!
+	else
+	{
+		if(moveY > head_y)
+		 	snake.down();
+		else
+			snake.up();
+	}
+	return;	
+}
+		/////////////////////////////////////////////////////////////////////////
+		
 			//Directions
 			if(dir == "right") head_x++;
 		else if(dir == "left") head_x--;
@@ -356,6 +503,12 @@ function init() {
 		b.draw();
 		k.draw();
 		t.draw();setTimeout(t.draw, 10000);
+	}
+	
+	function drawSnake() {
+		paintCanvas();
+		paintSnake();
+		updateSnake();
 	}
 	
 	reset = function() {
