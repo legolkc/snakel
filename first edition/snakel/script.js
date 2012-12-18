@@ -99,6 +99,9 @@ function init() {
 	var snake,
 			size = 10,
 			size_food = 10,
+			size_minSpeed = 10,
+			size_maxSpeed = 10,
+			size_BonusColor = 10,
 			speed = 5,
 			dir,
 			game_loop,
@@ -148,14 +151,14 @@ function init() {
 		this.x = Math.round(Math.random() * (w - size) / size);
 		this.y = Math.round(Math.random() * (h - size) / size);
 		food.image = new Image();
-		food.image.src = 'images/food.png';
+		food.image.src = 'images/apple.png';
 		this.draw = function() {
-			ctx.fillStyle = "red";
+			//ctx.fillStyle = "red";
 			
-			ctx.fillRect(this.x*size, this.y*size, size_food , size_food );
-			ctx.drawImage(food.image, this.x*size -5, this.y*size -5, size_food *2, size_food*2);
+			//ctx.fillRect(this.x*size, this.y*size, size_food , size_food );
+			ctx.drawImage(food.image, this.x*size-5, this.y*size-5, size_food *2, size_food*2);
 			if (size_food > 1){
-					size_food -= 0.05;
+					size_food -= 0.02;
 			}
 			else {
 			size_food = 10;
@@ -177,7 +180,17 @@ function init() {
 			
 			ctx.fillStyle = "orange";
 			
-			ctx.fillRect(this.x*size, this.y*size, size, size);
+			ctx.fillRect(this.x*size, this.y*size, size_maxSpeed, size_maxSpeed);
+			
+			if (size_maxSpeed > 1){
+					size_maxSpeed -= 0.02;
+			}
+			else {
+			size_maxSpeed = 10;
+			this.x = Math.round(Math.random() * (w - size) / size);
+			this.y = Math.round(Math.random() * (h - size) / size);
+			maxSpeed();
+			}
 		}
 	}
 	
@@ -192,7 +205,17 @@ function init() {
 		this.draw = function() {
 			ctx.fillStyle = "blue";
 			
-			ctx.fillRect(this.x*size, this.y*size, size, size);
+			ctx.fillRect(this.x*size, this.y*size, size_minSpeed, size_minSpeed);
+			
+			if (size_minSpeed > 1){
+					size_minSpeed -= 0.02;
+			}
+			else {
+			size_minSpeed = 10;
+			this.x = Math.round(Math.random() * (w - size) / size);
+			this.y = Math.round(Math.random() * (h - size) / size);
+			minSpeed();
+			}
 		}
 	}
 			
@@ -205,7 +228,17 @@ function init() {
 		this.draw = function() {
 			ctx.fillStyle = "violet";
 			
-			ctx.fillRect(this.x*size, this.y*size, size, size);
+			ctx.fillRect(this.x*size, this.y*size, size_BonusColor, size_BonusColor);
+			
+			if (size_BonusColor > 1){
+					size_BonusColor -= 0.02;
+			}
+			else {
+			size_BonusColor = 10;
+			this.x = Math.round(Math.random() * (w - size) / size);
+			this.y = Math.round(Math.random() * (h - size) / size);
+			BonusColor();
+			}
 		}
 	}
 			var t = new BonusColor();
@@ -418,6 +451,7 @@ function mouseControl(event)
 		//Bonus collision maxSpeed
 		if(head_x == b.x && head_y == b.y) {
 			coll = 1;
+			size_maxSpeed = 10;
 			b = new maxSpeed();	
 			speed += 5;
 			scoreText.innerHTML = "Score: "+score;
@@ -435,6 +469,7 @@ function mouseControl(event)
 		//Bonus collision minSpeed
 		if(head_x == k.x && head_y == k.y) {
 			coll = 1;
+			size_minSpeed = 10;
 			k = new minSpeed();
 			speed -= 5;
 			scoreText.innerHTML = "Score: "+score;
@@ -452,20 +487,14 @@ function mouseControl(event)
 		//Bonus collision ColorBonus
 		if(head_x == t.x && head_y == t.y) {
 			coll = 1;
-			t = new BonusColor();{
-			for(var i = 0; i < snake.length; i++) {
-				var s = snake[i];
-			
-				ctx.fillStyle = "blake";
-				ctx.fillRect(s.x*size, s.y*size, size, size);
-			
-			}
-	}
+			size_BonusColor = 10;
+			t = new BonusColor();
+			score += 50;
 			scoreText.innerHTML = "Score: "+score;
 			foodMusic.pause();
 			foodMusic.currentTime = 0;
 			foodMusic.play();
-			setTimeout(func, 5000);
+			
 			//Increase speed
 			if(speed <= 45) speed ++;
 			clearInterval(game_loop);
@@ -515,7 +544,7 @@ function mouseControl(event)
 		f.draw();
 		b.draw();
 		k.draw();
-		t.draw();setTimeout(t.draw, 10000);
+		t.draw();
 		
 	}
 	
@@ -566,6 +595,7 @@ function mouseControl(event)
 			}
 			
 			reMenu.style.zIndex = "1";
+			
 		}
 	
 	reset();
