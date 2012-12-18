@@ -248,7 +248,7 @@ function init() {
 			
 	//Initialize the snake
 	function initSnake() {
-		var length = 10;
+		var length = 1;
 		snake = [];
 		for(var i = length - 1; i >= 0; i--) {
 			snake.push({x: i, y: 0});
@@ -261,9 +261,9 @@ function init() {
 			s.image = new Image();
 		    s.image.src = 'images/snake.png';
 			
-			ctx.fillStyle = "white";
-			ctx.fillRect(s.x*size, s.y*size, size, size);
-			ctx.drawImage(s.image, s.x*size-5, s.y*size-5, size*2, size*2);
+			//ctx.fillStyle = "white";
+			//ctx.fillRect(s.x*size, s.y*size, size, size);
+			ctx.drawImage(s.image, s.x*size, s.y*size, size*1.5, size*1.5);
 			
 		}
 	}
