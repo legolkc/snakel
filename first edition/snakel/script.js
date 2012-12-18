@@ -227,11 +227,13 @@ function init() {
 	var BonusColor = function(){
 		this.x = Math.round(Math.random() * (w - size) / size);
 		this.y = Math.round(Math.random() * (h - size) / size);
-		
+		BonusColor.image = new Image();
+		BonusColor.image.src = 'images/50.png';
 		this.draw = function() {
 			ctx.fillStyle = "violet";
 			
 			ctx.fillRect(this.x*size, this.y*size, size_BonusColor, size_BonusColor);
+			ctx.drawImage(BonusColor.image, this.x*size-5, this.y*size-5, size_BonusColor*2, size_BonusColor*2);
 			
 			if (size_BonusColor > 1){
 					size_BonusColor -= 0.02;
