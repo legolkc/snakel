@@ -1,0 +1,41 @@
+article {
+  display: none;
+}
+body {
+  font-size: 24px;
+  font-weight: 800;
+  color: white;
+}
+@media screen and (max-width: 480px) {
+  body {
+    background-color: #ff2a18;
+  }
+  #menu, #reMenu   a#start, a#restart, p#loading  #score p#loading a#start #info2 canvas {
+    display: inline;
+  }
+}
+@media screen and (min-width: 480px) and (max-width: 1024px) {
+  body {
+    background-color: #00ff00;
+  }
+  #menu, #reMenu   a#start, a#restart, p#loading  #score p#loading a#start #info2 canvas {
+    display: inline;
+	
+  }
+}
+@media screen and (min-width: 1024px) {
+  body {
+    background-color: #0000ff;
+  }
+  #menu, #reMenu   a#start, a#restart, p#loading  #score p#loading a#start #info2 canvas {
+    display: inline;
+  }
+}
+@media screen and (orientation: landscape) {
+  body {
+    background-color: #ff7f00;
+  }
+  #menu, #reMenu   a#start, a#restart, p#loading  #score p#loading a#start #info2 canvas{
+    display: inline;
+  }
+}

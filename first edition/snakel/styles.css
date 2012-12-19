@@ -1,5 +1,8 @@
 	
-	body {text-align:center;}
+	body {text-align:center;
+		  front-size:24px;
+		  front-weight:800;
+		  color:white;}
 canvas { border:5px solid #FFFFFF ;
 background-color: #90EE90;
 background-image: url('images/trava_grass_gazon_lawn-300x225.png'); }
@@ -23,7 +26,7 @@ h1, p, a {
 	font: 72px "Press Start 2P", cursive;
 	color: red;
 	text-align: center;
-	margin: 0;
+	margin: auto;
 }
 a{
 	font-size : 16px; 
@@ -51,7 +54,7 @@ a#start, a#restart, p#loading {
 	border-bottom: 5px solid red;
 	padding: 10px;
 	text-decoration: none;
-	margin: 0 auto; 
+	margin: auto; 
 }
 
 a#restart {width: 165px; top: 20%}
@@ -63,6 +66,7 @@ a#restart {width: 165px; top: 20%}
 	z-index: 1;
 	padding-left: 240px;
 	font-size: 16px;
+	top:82%;
 }
 
 p#loading {
