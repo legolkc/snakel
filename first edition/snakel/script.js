@@ -231,9 +231,9 @@ function init() {
 		BonusColor.image = new Image();
 		BonusColor.image.src = 'images/50.png';
 		this.draw = function() {
-			ctx.fillStyle = "violet";
+			//ctx.fillStyle = "violet";
 			
-			ctx.fillRect(this.x*size, this.y*size, size_BonusColor, size_BonusColor);
+			//ctx.fillRect(this.x*size, this.y*size, size_BonusColor, size_BonusColor);
 			ctx.drawImage(BonusColor.image, this.x*size-5, this.y*size-5, size_BonusColor*2, size_BonusColor*2);
 			
 			if (size_BonusColor > 5){
@@ -260,14 +260,31 @@ function init() {
 		this.draw = function() {
 			
 			ctx.drawImage(stena.image, this.x*size-2, this.y*size-3, size * 2, size * 2);
-			
+	
 		//st = new stena();
 		//st.draw();
 		}
 		//}
 	}
-			
+
 			var st = new stena();
+			
+			var vrag = function(){
+		//for (i=1; i<50; i++)
+		//{
+		this.x = Math.round(Math.random() * (w - size) / size);
+		this.y = Math.round(Math.random() * (h - size) / size);
+		vrag.image = new Image();
+		vrag.image.src = 'images/vrag.png';
+		
+		this.draw = function() {
+			
+			ctx.drawImage(vrag.image, this.x*size-2, this.y*size-3, size*1.2, size*2);
+		}
+		//}
+	}
+
+			var vr = new vrag();
 			
 	//Initialize the snake
 	function initSnake() {
@@ -530,6 +547,21 @@ function mouseControl(event)
 			game_loop = setInterval(draw, 1000/speed);
 		}
 		
+		//stena
+		if(head_x == st.x && head_y == st.y) {
+			coll = 1;
+			foodMusic.pause();
+			hitType = "wall";
+			gameover();
+			st = new BonusColor();
+			scoreText.innerHTML = "Score: "+score;
+			
+			//Increase speed
+			if(speed <= 45) speed ++;
+			clearInterval(game_loop);
+			game_loop = setInterval(draw, 1000/speed);
+		}
+		
 		//Food collision
 		if(head_x == f.x && head_y == f.y) {
 			coll = 1;
@@ -574,8 +606,8 @@ function mouseControl(event)
 		b.draw();
 		k.draw();
 		t.draw();
+		vr.draw();
 		st.draw();
-		
 		
 	}
 	
@@ -592,6 +624,8 @@ function mouseControl(event)
 		k = new minSpeed();
 		t = new BonusColor();
 		st = new stena();
+		vr = new vrag();
+		
 		reMenu.style.zIndex = "-1"
 		dir = "right";
 		over = 0;
@@ -643,6 +677,7 @@ function startMenu() {
 	
 	scoreText = document.getElementById("score");
 	reMenu.style.zIndex = "-1"
+	
 }
 
 startMenu();
