@@ -102,6 +102,7 @@ function init() {
 			size_minSpeed = 10,
 			size_maxSpeed = 10,
 			size_BonusColor = 10,
+			size_st = 10,
 			speed = 5,
 			dir,
 			game_loop,
@@ -157,7 +158,7 @@ function init() {
 			
 			//ctx.fillRect(this.x*size, this.y*size, size_food , size_food );
 			ctx.drawImage(food.image, this.x*size-5, this.y*size-5, size_food *2, size_food*2);
-			if (size_food > 1){
+			if (size_food > 5){
 					size_food -= 0.02;
 			}
 			else {
@@ -182,7 +183,7 @@ function init() {
 			
 			ctx.fillRect(this.x*size, this.y*size, size_maxSpeed, size_maxSpeed);
 			
-			if (size_maxSpeed > 1){
+			if (size_maxSpeed > 5){
 					size_maxSpeed -= 0.02;
 			}
 			else {
@@ -210,7 +211,7 @@ function init() {
 			//ctx.fillRect(this.x*size, this.y*size, size_minSpeed, size_minSpeed);
 			ctx.drawImage(minSpeed.image, this.x*size-5, this.y*size-5, size*2, size*2);
 			
-			if (size_minSpeed > 1){
+			if (size_minSpeed > 5){
 					size_minSpeed -= 0.02;
 			}
 			else {
@@ -235,7 +236,7 @@ function init() {
 			ctx.fillRect(this.x*size, this.y*size, size_BonusColor, size_BonusColor);
 			ctx.drawImage(BonusColor.image, this.x*size-5, this.y*size-5, size_BonusColor*2, size_BonusColor*2);
 			
-			if (size_BonusColor > 1){
+			if (size_BonusColor > 5){
 					size_BonusColor -= 0.02;
 			}
 			else {
@@ -247,6 +248,26 @@ function init() {
 		}
 	}
 			var t = new BonusColor();
+			
+		var stena = function(){
+		//for (i=1; i<50; i++)
+		//{
+		this.x = Math.round(Math.random() * (w - size) / size);
+		this.y = Math.round(Math.random() * (h - size) / size);
+		stena.image = new Image();
+		stena.image.src = 'images/borts.png';
+		
+		this.draw = function() {
+			
+			ctx.drawImage(stena.image, this.x*size-2, this.y*size-3, size * 2, size * 2);
+			
+		//st = new stena();
+		//st.draw();
+		}
+		//}
+	}
+			
+			var st = new stena();
 			
 	//Initialize the snake
 	function initSnake() {
@@ -553,6 +574,8 @@ function mouseControl(event)
 		b.draw();
 		k.draw();
 		t.draw();
+		st.draw();
+		
 		
 	}
 	
@@ -568,6 +591,7 @@ function mouseControl(event)
 		b = new maxSpeed();
 		k = new minSpeed();
 		t = new BonusColor();
+		st = new stena();
 		reMenu.style.zIndex = "-1"
 		dir = "right";
 		over = 0;
