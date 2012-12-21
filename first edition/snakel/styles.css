@@ -1,7 +1,7 @@
 	
 	body {text-align:center;
 		  front-size:24px;
-		  front-weight:800;
+		  front-weight:400;
 		  color:white;}
 canvas { border:5px solid #FFFFFF ;
 background-color: #90EE90;
@@ -123,6 +123,6 @@ p#loading {
 	display: none;
 }
 
-a#start{top: 100%;}
+a#start{top: 20%;}
 
 #info2 {padding : 0;}

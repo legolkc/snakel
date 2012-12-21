@@ -29,7 +29,7 @@ for(var i = 0; i < files.length; i++) {
 
 function showButton() {
 	start.style.top = "3%";
-	loading.style.top = "3%";
+	loading.style.top = "1%";
 }
 
 
