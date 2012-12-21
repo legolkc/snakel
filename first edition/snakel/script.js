@@ -38,8 +38,8 @@ var canvas = document.getElementById("canvas"),
 		ctx = canvas.getContext("2d"),
 		
 		//Full width and height
-		w =800,
-		h =600;
+		w =canvas.height,
+		h =canvas.width;
 	
 canvas.height = h;
 canvas.width = w;

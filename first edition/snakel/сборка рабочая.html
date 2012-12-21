@@ -3,28 +3,24 @@
     <head>
         <title>Snake</title>
 			<meta charset="utf-8" />
-			<link href="media-queries.css" rel="stylesheet" type="text/css">
-			
+	</head>		
 	
 <body>
 
-<table border="0" bgcolor="green" align="center">
-	<tr height="30" align="middle">
-		<td width="200">
+<table style="width: 100%; height: 100%; border: 0 none; background: green" align="center">
+	<tr>
+		<td style="width: 30%; height: 30px">
 			<a class="button" href='#' target="_self">Pause</a>
 			<a href='#' class="text" onclick="onPauseClick()">P a u s e</a>
 		</td>
-		<td width="300" id="score">: 0</td>
+		<td style="width: 40%" id="score">: 0</td>
 	</tr>
 	<tr>
 		<td colspan="2">
-            <canvas id="canvas" width="800" height="600" ></canvas>
-            
-		
+            <canvas id="canvas" style="width: 100%; height: 100%" ></canvas>
 		</td>
 	</tr>
 </table>
-</body>
 	
 <div id="reMenu">
 	<h1 id="snake2">Snake</h1>
@@ -42,7 +38,7 @@
 
 
 <!-- Audio -->
-<audio id="main_music" loop >
+<audio id="main_music" style="width: 100%; height: 45%" loop  >
 	<source src="music/main.mp3" type="audio/mp3" />
 	<source src="music/main.ogg" type="audio/ogg"/>
 </audio>
@@ -57,13 +53,11 @@
 	<source src="music/food.ogg" type="audio/ogg"/>
 </audio>
 	
-	<LINK href="styles.css" rel="stylesheet" type="text/css">
+	<LINK href="styles.css" rel="stylesheet" type="text/css"/>
 	<script type="text/javascript" src="jquery-1.8.2.js"></script>
 	<script src="script.js" type="text/javascript"></script>
-
+</body>
 <!--	<a href="javascript: void(0)" id="mute" onclick="mute()" >¬ключить звук</a> 	
-	<button><img src="images/trava_grass_gazon_lawn-300x225.png"  title = "¬ключить звук"></button> 	-->
-    </head>
-   
+	<button><img src="images/trava_grass_gazon_lawn-300x225.png"  title = "¬ключить звук"></button> 	-->   
    
 </html>
