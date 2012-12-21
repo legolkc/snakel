@@ -1,4 +1,4 @@
-document.ontouchstart = function(event) 
+﻿document.ontouchstart = function(event) 
 { 
 	event.preventDefault();
 };		
@@ -119,17 +119,17 @@ function init() {
 	
 	//Custom funny gameover messages
 	var msgsSelf = [];
-	msgsSelf[0] = "��� ���� ����� ���.�� ��� ��� ����!";
-	msgsSelf[1] = "���� ���� ���, ������� ���?";
-	msgsSelf[2] = "AArrgghhh!! I bit myself!!";	
-	msgsSelf[3] = "Do you have Autophagia?";	
-	
-	var msgsWall = [];
-	msgsWall[0] = "You broke your head!";
-	msgsWall[1] = "The wall is stronger than it seems!";
-	msgsWall[2] = "There's no way to escape the game...";
-	msgsWall[3] = "LOOK MA! NO HEAD..!!";
-	msgsWall[4] = "Can't see the wall? Huh?";
+        msgsSelf[0] = "Там есть много еды.Не ешь сам себя!";
+        msgsSelf[1] = "Твое тело что, вкуснее еды?";
+        msgsSelf[2] = "В рот тебе хвост!!!";
+        msgsSelf[3] = "У тебя что, болезнь самопоедания?";
+
+        var msgsWall = [];
+        msgsWall[0] = "Ты считаешь что твоя голова крепче стены?";
+        msgsWall[1] = "СМОТРИТЕ ВСЕ!!!НЕТ ГОЛОВЫ!!!";
+        msgsWall[2] = "Ну сколько можно таранить стены?!";
+        msgsWall[3] = "Голова в дребезги!";
+        msgsWall[4] = "Не видишь стену?БАХ!";
 /*	
 	function playArea() {
 		ctx.fillStyle = url('images/trava_grass_gazon_lawn-300x225.png');
