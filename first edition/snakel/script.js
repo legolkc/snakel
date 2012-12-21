@@ -28,7 +28,7 @@ for(var i = 0; i < files.length; i++) {
 }
 
 function showButton() {
-	start.style.top = "30%";
+	start.style.top = "20%";
 	loading.style.top = "5%";
 }
 
@@ -97,13 +97,13 @@ function init() {
 	menu.style.zIndex = "-1";
 	
 	var snake,
-			size = 10,
-			size_food = 10,
-			size_minSpeed = 10,
-			size_maxSpeed = 10,
-			size_BonusColor = 10,
-			size_st = 10,
-			speed = 5,
+			size = 5,
+			size_food = 5,
+			size_minSpeed = 5,
+			size_maxSpeed = 5,
+			size_BonusColor = 5,
+			size_st = 5,
+			speed = 8,
 			dir,
 			game_loop,
 			over = 0,
@@ -157,12 +157,12 @@ function init() {
 			//ctx.fillStyle = "red";
 			
 			//ctx.fillRect(this.x*size, this.y*size, size_food , size_food );
-			ctx.drawImage(food.image, this.x*size-5, this.y*size-5, size_food *2, size_food*2);
-			if (size_food > 5){
-					size_food -= 0.02;
+			ctx.drawImage(food.image, this.x*size, this.y*size, size_food, size_food);
+			if (size_food > 2){
+					size_food -= 0.01;
 			}
 			else {
-			size_food = 10;
+			size_food = 5;
 			this.x = Math.round(Math.random() * (w - size) / size);
 			this.y = Math.round(Math.random() * (h - size) / size);
 			Food();
@@ -183,11 +183,11 @@ function init() {
 			
 			ctx.fillRect(this.x*size, this.y*size, size_maxSpeed, size_maxSpeed);
 			
-			if (size_maxSpeed > 5){
-					size_maxSpeed -= 0.02;
+			if (size_maxSpeed > 2){
+					size_maxSpeed -= 0.01;
 			}
 			else {
-			size_maxSpeed = 10;
+			size_maxSpeed = 5;
 			this.x = Math.round(Math.random() * (w - size) / size);
 			this.y = Math.round(Math.random() * (h - size) / size);
 			maxSpeed();
@@ -209,13 +209,13 @@ function init() {
 			//ctx.fillStyle = "blue";
 			
 			//ctx.fillRect(this.x*size, this.y*size, size_minSpeed, size_minSpeed);
-			ctx.drawImage(minSpeed.image, this.x*size-5, this.y*size-5, size*2, size*2);
+			ctx.drawImage(minSpeed.image, this.x*size, this.y*size, size, size);
 			
-			if (size_minSpeed > 5){
-					size_minSpeed -= 0.02;
+			if (size_minSpeed > 2){
+					size_minSpeed -= 0.01;
 			}
 			else {
-			size_minSpeed = 10;
+			size_minSpeed = 5;
 			this.x = Math.round(Math.random() * (w - size) / size);
 			this.y = Math.round(Math.random() * (h - size) / size);
 			minSpeed();
@@ -234,13 +234,13 @@ function init() {
 			//ctx.fillStyle = "violet";
 			
 			//ctx.fillRect(this.x*size, this.y*size, size_BonusColor, size_BonusColor);
-			ctx.drawImage(BonusColor.image, this.x*size-5, this.y*size-5, size_BonusColor*2, size_BonusColor*2);
+			ctx.drawImage(BonusColor.image, this.x*size, this.y*size, size_BonusColor, size_BonusColor);
 			
-			if (size_BonusColor > 5){
-					size_BonusColor -= 0.02;
+			if (size_BonusColor > 2){
+					size_BonusColor -= 0.01;
 			}
 			else {
-			size_BonusColor = 10;
+			size_BonusColor = 5;
 			this.x = Math.round(Math.random() * (w - size) / size);
 			this.y = Math.round(Math.random() * (h - size) / size);
 			BonusColor();
@@ -259,7 +259,7 @@ function init() {
 		
 		this.draw = function() {
 			
-			ctx.drawImage(stena.image, this.x*size-2, this.y*size-3, size * 2, size * 2);
+			ctx.drawImage(stena.image, this.x*size, this.y*size, size, size);
 	
 		//st = new stena();
 		//st.draw();
@@ -279,7 +279,7 @@ function init() {
 		
 		this.draw = function() {
 			
-			ctx.drawImage(vrag.image, this.x*size-2, this.y*size-3, size*1.2, size*2);
+			ctx.drawImage(vrag.image, this.x*size, this.y*size, size, size);
 		}
 		//}
 	}
@@ -296,6 +296,7 @@ function init() {
 	}
 	
 	function paintSnake() {
+	
 		for(var i = 0; i < snake.length; i++) {
 			var s = snake[i];
 			s.image = new Image();
@@ -303,7 +304,7 @@ function init() {
 			
 			//ctx.fillStyle = "white";
 			//ctx.fillRect(s.x*size, s.y*size, size, size);
-			ctx.drawImage(s.image, s.x*size, s.y*size, size*1.5, size*1.5);
+			ctx.drawImage(s.image, s.x*size, s.y*size, size, size);
 			
 		}
 	}
@@ -321,7 +322,7 @@ $('#canvas').mousedown(function(e) {
 			if(key) e.preventDefault();
 		*/
 		
-		if( e.pageX < (ctx.canvas.width + 500)/2 )
+		if( e.pageX < (ctx.canvas.width)/2 )
 		{
 			if( dir == "down" ) dir = "right";
 			else if( dir == "right" ) dir = "up";
@@ -341,6 +342,7 @@ $('#canvas').mousedown(function(e) {
 		//Update the position of the snake
 		var head_x = snake[0].x;
 		var head_y = snake[0].y;
+		
 ///////////////////////////////////////////////////////////////управление мышкой		
 function Move()
 {
@@ -497,16 +499,16 @@ function mouseControl(event)
 		//Bonus collision maxSpeed
 		if(head_x == b.x && head_y == b.y) {
 			coll = 1;
-			size_maxSpeed = 10;
+			size_maxSpeed = 5;
 			b = new maxSpeed();	
-			speed += 5;
+			speed += 2;
 			scoreText.innerHTML = "Score: "+score;
 			foodMusic.pause();
 			foodMusic.currentTime = 0;
 			foodMusic.play();
 			
 			//Increase speed
-			if(speed <= 45) speed ++;
+			if(speed >= 45) speed --;
 			clearInterval(game_loop);
 			game_loop = setInterval(draw, 1000/speed);
 		}
@@ -515,16 +517,16 @@ function mouseControl(event)
 		//Bonus collision minSpeed
 		if(head_x == k.x && head_y == k.y) {
 			coll = 1;
-			size_minSpeed = 10;
+			size_minSpeed = 5;
 			k = new minSpeed();
-			speed -= 5;
+			speed -= 2;
 			scoreText.innerHTML = "Score: "+score;
 			foodMusic.pause();
 			foodMusic.currentTime = 0;
 			foodMusic.play();
 			
 			//Increase speed
-			if(speed <= 45) speed ++;
+			if(speed >= 45) speed --;
 			clearInterval(game_loop);
 			game_loop = setInterval(draw, 1000/speed);
 		}
@@ -533,7 +535,7 @@ function mouseControl(event)
 		//Bonus collision ColorBonus
 		if(head_x == t.x && head_y == t.y) {
 			coll = 1;
-			size_BonusColor = 10;
+			size_BonusColor = 5;
 			t = new BonusColor();
 			score += 50;
 			scoreText.innerHTML = "Score: "+score;
@@ -542,7 +544,7 @@ function mouseControl(event)
 			foodMusic.play();
 			
 			//Increase speed
-			if(speed <= 45) speed ++;
+			if(speed >= 45) speed --;
 			clearInterval(game_loop);
 			game_loop = setInterval(draw, 1000/speed);
 		}
@@ -557,7 +559,7 @@ function mouseControl(event)
 			scoreText.innerHTML = "Score: "+score;
 			
 			//Increase speed
-			if(speed <= 45) speed ++;
+			if(speed >= 45) speed --;
 			clearInterval(game_loop);
 			game_loop = setInterval(draw, 1000/speed);
 		}
@@ -565,7 +567,7 @@ function mouseControl(event)
 		//Food collision
 		if(head_x == f.x && head_y == f.y) {
 			coll = 1;
-			size_food = 10;
+			size_food = 5;
 			f = new Food();
 			var tail = {x: head_x, y:head_y};
 			snake.unshift(tail);	
@@ -576,7 +578,7 @@ function mouseControl(event)
 			foodMusic.play();
 			
 			//Increase speed
-			if(speed <= 45) speed ++;
+			if(speed >= 45) speed --;
 			clearInterval(game_loop);
 			game_loop = setInterval(draw, 1000/speed);
 		}
@@ -629,7 +631,7 @@ function mouseControl(event)
 		reMenu.style.zIndex = "-1"
 		dir = "right";
 		over = 0;
-		speed = 15;
+		speed = 8;
 		if(typeof game_loop != "undefined")  clearInterval(game_loop); 
 		game_loop = setInterval(draw, 1000/speed);
 		
