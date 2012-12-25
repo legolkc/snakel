@@ -36,7 +36,7 @@ var canvas = document.getElementById("canvas"),
 		
 		//Full width and height
 		w =canvas.height,
-		h =canvas.width;
+		h =canvas.width/2;
 	
 canvas.height = h;
 canvas.width = w;
@@ -48,12 +48,13 @@ function init() {
 	menu.style.zIndex = "-1";
 	
 	var snake,
-			size = 5,
-			size_food = 5,
-			size_minSpeed = 5,
-			size_maxSpeed = 5,
-			size_BonusColor = 5,
-			size_st = 5,
+			size = 8,
+			size_food = 8,
+			size_minSpeed = 8,
+			size_maxSpeed = 8,
+			size_BonusColor = 8,
+			size_st = 8,
+			size_vr = 8,
 			speed = 8,
 			dir,
 			game_loop,
@@ -61,8 +62,8 @@ function init() {
 			hitType;
 			
 	var bot,
-			size1 = 5,
-			speed1 = 5,
+			size1 = 8,
+			speed1 = 8,
 			dir1,
 			game_loop1,
 			over1 = 0,
@@ -100,10 +101,10 @@ function init() {
 		this.draw = function() {
 			ctx.drawImage(food.image, this.x*size, this.y*size, size_food, size_food);
 			if (size_food > 2){
-					size_food -= 0.01;
+					size_food -= 0.1;
 			}
 			else {
-			size_food = 5;
+			size_food = 8;
 			this.x = Math.round(Math.random() * (w - size) / size);
 			this.y = Math.round(Math.random() * (h - size) / size);
 			Food();
@@ -117,18 +118,17 @@ function init() {
 	var maxSpeed = function(){
 		this.x = Math.round(Math.random() * (w - size) / size);
 		this.y = Math.round(Math.random() * (h - size) / size);
-		
+		maxSpeed.image = new Image();
+		maxSpeed.image.src = 'images/speedMax.png';
 		this.draw = function() {
 			
-			ctx.fillStyle = "orange";
-			
-			ctx.fillRect(this.x*size, this.y*size, size_maxSpeed, size_maxSpeed);
+			ctx.drawImage(maxSpeed.image, this.x*size, this.y*size, size, size);
 			
 			if (size_maxSpeed > 2){
-					size_maxSpeed -= 0.01;
+					size_maxSpeed -= 0.1;
 			}
 			else {
-			size_maxSpeed = 5;
+			size_maxSpeed = 8;
 			this.x = Math.round(Math.random() * (w - size) / size);
 			this.y = Math.round(Math.random() * (h - size) / size);
 			maxSpeed();
@@ -144,16 +144,16 @@ function init() {
 		this.x = Math.round(Math.random() * (w - size) / size);
 		this.y = Math.round(Math.random() * (h - size) / size);
 		minSpeed.image = new Image();
-		minSpeed.image.src = 'images/minSpeed.png';
+		minSpeed.image.src = 'images/minSpeed_.png';
 		
 		this.draw = function() {
 			ctx.drawImage(minSpeed.image, this.x*size, this.y*size, size, size);
 			
 			if (size_minSpeed > 2){
-					size_minSpeed -= 0.01;
+					size_minSpeed -= 0.1;
 			}
 			else {
-			size_minSpeed = 5;
+			size_minSpeed = 8;
 			this.x = Math.round(Math.random() * (w - size) / size);
 			this.y = Math.round(Math.random() * (h - size) / size);
 			minSpeed();
@@ -167,15 +167,15 @@ function init() {
 		this.x = Math.round(Math.random() * (w - size) / size);
 		this.y = Math.round(Math.random() * (h - size) / size);
 		BonusColor.image = new Image();
-		BonusColor.image.src = 'images/50.png';
+		BonusColor.image.src = 'images/5_0.png';
 		this.draw = function() {
 			ctx.drawImage(BonusColor.image, this.x*size, this.y*size, size_BonusColor, size_BonusColor);
 			
 			if (size_BonusColor > 2){
-					size_BonusColor -= 0.01;
+					size_BonusColor -= 0.1;
 			}
 			else {
-			size_BonusColor = 5;
+			size_BonusColor = 8;
 			this.x = Math.round(Math.random() * (w - size) / size);
 			this.y = Math.round(Math.random() * (h - size) / size);
 			BonusColor();
@@ -192,7 +192,16 @@ function init() {
 		
 		this.draw = function() {
 			
-			ctx.drawImage(stena.image, this.x*size, this.y*size, size, size);
+			ctx.drawImage(stena.image, this.x*size, this.y*size, size_st, size_st);
+			if (size_st> 2){
+					size_st -= 0.1;
+			}
+			else {
+			size_st = 8;
+			this.x = Math.round(Math.random() * (w - size) / size);
+			this.y = Math.round(Math.random() * (h - size) / size);
+			stena();
+			}
 		}
 	}
 
@@ -206,7 +215,16 @@ function init() {
 		
 		this.draw = function() {
 			
-			ctx.drawImage(vrag.image, this.x*size, this.y*size, size, size);
+			ctx.drawImage(vrag.image, this.x*size, this.y*size, size_vr, size_vr);
+			if (size_vr> 2){
+					size_vr -= 0.1;
+			}
+			else {
+			size_vr = 8;
+			this.x = Math.round(Math.random() * (w - size) / size);
+			this.y = Math.round(Math.random() * (h - size) / size);
+			vrag();
+			}
 		}
 		//}
 	}
@@ -218,7 +236,7 @@ function init() {
 		var length = 1;
 		snake = [];
 		for(var i = length - 1; i >= 0; i--) {
-			snake.push({x: i, y: 0});
+			snake.push({x: i, y: 5});
 		}
 	}
 	
@@ -427,7 +445,7 @@ function mouseControl(event)
 		//Bonus collision maxSpeed
 		if(head_x == b.x && head_y == b.y) {
 			coll = 1;
-			size_maxSpeed = 5;
+			size_maxSpeed = 8;
 			b = new maxSpeed();	
 			speed += 2;
 			scoreText.innerHTML = "Score: "+score;
@@ -445,7 +463,7 @@ function mouseControl(event)
 		//Bonus collision minSpeed
 		if(head_x == k.x && head_y == k.y) {
 			coll = 1;
-			size_minSpeed = 5;
+			size_minSpeed = 8;
 			k = new minSpeed();
 			speed -= 2;
 			scoreText.innerHTML = "Score: "+score;
@@ -463,7 +481,7 @@ function mouseControl(event)
 		//Bonus collision ColorBonus
 		if(head_x == t.x && head_y == t.y) {
 			coll = 1;
-			size_BonusColor = 5;
+			size_BonusColor = 8;
 			t = new BonusColor();
 			score += 50;
 			scoreText.innerHTML = "Score: "+score;
@@ -492,10 +510,25 @@ function mouseControl(event)
 			game_loop = setInterval(draw, 1000/speed);
 		}
 		
+		//vrag
+		if(head_x == vr.x && head_y == vr.y) {
+			coll = 1;
+			foodMusic.pause();
+			hitType = "wall";
+			gameover();
+			vr = new Vrag();
+			scoreText.innerHTML = "Score: "+score;
+			
+			//Increase speed
+			if(speed >= 45) speed --;
+			clearInterval(game_loop);
+			game_loop = setInterval(draw, 1000/speed);
+		}
+		
 		//Food collision
 		if(head_x == f.x && head_y == f.y) {
 			coll = 1;
-			size_food = 5;
+			size_food = 8;
 			f = new Food();
 			var tail = {x: head_x, y:head_y};
 			snake.unshift(tail);	
@@ -549,6 +582,8 @@ function mouseControl(event)
 	
 	reset = function() {
 		initSnake();
+		size_vr = 8;
+		size_st = 8;
 		f = new Food();
 		b = new maxSpeed();
 		k = new minSpeed();
